@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { PROFILE } from "@/lib/questData";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
 function StatBar({ label, value, max }) {
@@ -50,7 +50,7 @@ export default function CharacterProfile() {
           >
             <div className="flex justify-center mb-4">
               <div className="bg-gradient-to-b from-quest-purple/40 to-quest-navy-deep p-4 border-2 border-quest-gold/40">
-                <PlayerCharacter state="idle" size={120} />
+                <Heroine state="idle" size={130} />
               </div>
             </div>
             <div className="space-y-2 font-pixel text-lg">

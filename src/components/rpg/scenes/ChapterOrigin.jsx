@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ORIGIN } from "@/lib/questData";
 import ChapterHeading from "@/components/rpg/ChapterHeading";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 import RPGDialog from "@/components/rpg/RPGDialog";
 import { School, BookOpen, Milestone, Home } from "lucide-react";
@@ -75,7 +75,7 @@ export default function ChapterOrigin({ onAchievement }) {
 
         {/* Character walking */}
         <div className="flex justify-center mt-10">
-          <PlayerCharacter state="walk" size={70} />
+          <Heroine state="walk" size={80} />
         </div>
       </div>
 

@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Image } from "@/components/ui/image";
 import { ACADEMY, IMAGE_URLS } from "@/lib/questData";
 import ChapterHeading from "@/components/rpg/ChapterHeading";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
 export default function AcademyGates({ onAchievement }) {
@@ -52,7 +52,7 @@ export default function AcademyGates({ onAchievement }) {
         </div>
 
         <div className="flex justify-center">
-          <PlayerCharacter state="walk" size={80} />
+          <Heroine state="walk" size={90} />
         </div>
       </div>
     </section>

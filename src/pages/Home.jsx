@@ -7,14 +7,19 @@ import AchievementPopup from "@/components/rpg/AchievementPopup";
 import HeroScene from "@/components/rpg/scenes/HeroScene";
 import CharacterProfile from "@/components/rpg/scenes/CharacterProfile";
 import ChapterOrigin from "@/components/rpg/scenes/ChapterOrigin";
+import ForestPassage from "@/components/rpg/scenes/cinematic/ForestPassage";
 import ChapterForest from "@/components/rpg/scenes/ChapterForest";
-import ChapterMountain from "@/components/rpg/scenes/ChapterMountain";
-import BossBattle from "@/components/rpg/scenes/BossBattle";
+import MountainPassage from "@/components/rpg/scenes/cinematic/MountainPassage";
+import DragonEncounter from "@/components/rpg/scenes/cinematic/DragonEncounter";
+import BossBattleCinematic from "@/components/rpg/scenes/cinematic/BossBattleCinematic";
 import LootSkills from "@/components/rpg/scenes/LootSkills";
 import Inventory from "@/components/rpg/scenes/Inventory";
 import QuestLog from "@/components/rpg/scenes/QuestLog";
+import DragonFlight from "@/components/rpg/scenes/cinematic/DragonFlight";
+import CityArrival from "@/components/rpg/scenes/cinematic/CityArrival";
 import FinanceCity from "@/components/rpg/scenes/FinanceCity";
 import WhyFinance from "@/components/rpg/scenes/WhyFinance";
+import AcademySunrise from "@/components/rpg/scenes/cinematic/AcademySunrise";
 import AcademyGates from "@/components/rpg/scenes/AcademyGates";
 import FinalBoss from "@/components/rpg/scenes/FinalBoss";
 import FinalScreen from "@/components/rpg/scenes/FinalScreen";
@@ -28,7 +33,8 @@ export default function Home() {
   const [progress, setProgress] = useState(0);
   useMotionValueEvent(scrollYProgress, "change", (v) => setProgress(v));
 
-  // Track active section
+  // Track the chapter band crossing the middle of the screen.
+  // (Tall pinned stages never fill 40% of the viewport, so use a center line.)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -40,7 +46,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.4 }
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
     );
     CHAPTERS.forEach((c) => {
       const el = document.getElementById(c.id);
@@ -75,18 +81,39 @@ export default function Home() {
       <AchievementPopup achievement={achievement} onDone={() => setAchievement(null)} />
 
       <main>
+        {/* title screen */}
         <HeroScene onStart={handleStart} onProfile={handleProfile} />
+        {/* calm beat — who she is */}
         <CharacterProfile />
         <ChapterOrigin onAchievement={unlock} />
+
+        {/* WOW 1 — she leaves home and travels into the unknown forest */}
+        <ForestPassage />
+        {/* calm beat — the crossroads decision */}
         <ChapterForest />
-        <ChapterMountain />
-        <BossBattle onAchievement={unlock} />
+
+        {/* WOW 2 — the forest falls away and a mountain emerges; the climb */}
+        <MountainPassage />
+
+        {/* WOW 3 + 4 — the encounter and the full scroll-controlled boss battle */}
+        <DragonEncounter />
+        <BossBattleCinematic onAchievement={unlock} />
+
+        {/* calm beats — the loot, her inventory, the quest log */}
         <LootSkills onAchievement={unlock} />
         <Inventory />
         <QuestLog />
+
+        {/* WOW 5 + 6 — dragon flight and the City of Capital reveal */}
+        <DragonFlight />
+        <CityArrival />
         <FinanceCity />
         <WhyFinance />
+
+        {/* WOW 7 — sunrise at the academy gates */}
+        <AcademySunrise onAchievement={unlock} />
         <AcademyGates onAchievement={unlock} />
+
         <FinalBoss />
         <FinalScreen />
       </main>

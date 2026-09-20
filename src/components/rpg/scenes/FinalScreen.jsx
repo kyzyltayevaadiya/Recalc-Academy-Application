@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FINALE } from "@/lib/questData";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
 export default function FinalScreen() {
@@ -21,7 +21,7 @@ export default function FinalScreen() {
 
       <div className="relative z-10 text-center max-w-2xl">
         <div className="flex justify-center mb-8">
-          <PlayerCharacter state="idle" size={90} />
+          <Heroine state="celebrate" size={100} />
         </div>
 
         <div className="font-display text-2xl sm:text-3xl text-white text-shadow-pixel mb-2 h-12">

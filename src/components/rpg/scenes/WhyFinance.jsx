@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WHY_FINANCE } from "@/lib/questData";
 import ChapterHeading from "@/components/rpg/ChapterHeading";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
 export default function WhyFinance() {
@@ -102,7 +102,7 @@ export default function WhyFinance() {
 
         {/* Character by campfire */}
         <div className="flex justify-center items-end gap-6">
-          <PlayerCharacter state="idle" size={70} />
+          <Heroine state="sit" size={80} />
           <div className="text-5xl animate-flicker">🔥</div>
         </div>
       </div>

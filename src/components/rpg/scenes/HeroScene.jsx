@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Image } from "@/components/ui/image";
 import { HERO, IMAGE_URLS } from "@/lib/questData";
 import RPGDialog from "@/components/rpg/RPGDialog";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
 export default function HeroScene({ onStart, onProfile }) {
@@ -95,7 +95,7 @@ export default function HeroScene({ onStart, onProfile }) {
 
       {/* Protagonist on the hill, bottom-left */}
       <div className="absolute bottom-16 left-8 sm:left-20 z-10 hidden sm:block">
-        <PlayerCharacter state="idle" size={70} />
+        <Heroine state="look" size={80} />
       </div>
 
       <RPGDialog show={dialog} title="QUEST STARTED" onClose={handleClose}>

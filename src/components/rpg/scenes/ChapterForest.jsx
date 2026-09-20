@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FOREST } from "@/lib/questData";
 import ChapterHeading from "@/components/rpg/ChapterHeading";
-import PlayerCharacter from "@/components/rpg/PlayerCharacter";
+import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
 export default function ChapterForest() {
@@ -94,7 +94,7 @@ export default function ChapterForest() {
         )}
 
         <div className="flex justify-center mt-12">
-          <PlayerCharacter state={chosen ? "walk" : "idle"} size={70} />
+          <Heroine state={chosen ? "walk" : "read"} size={80} />
         </div>
       </div>
     </section>
