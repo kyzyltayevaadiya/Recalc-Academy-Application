@@ -2,17 +2,26 @@ import React, { useMemo } from "react";
 
 // Lightweight starfield / particle field rendered with absolutely-positioned divs.
 // variant: "stars" | "embers" | "snow" | "fireflies" | "leaves" | "confetti"
-export default function ParticleField({ variant = "stars", count = 60, className = "" }) {
+// sizeRange/opacityRange/durRange let a caller build distinct depth layers
+// (e.g. tiny dim far stars vs. fewer, brighter near stars) from the same
+// system instead of a new one — all optional, default behavior unchanged.
+export default function ParticleField({
+  variant = "stars", count = 60, className = "",
+  sizeRange = [1, 4], opacityRange = [0.3, 1], durRange = [2, 7],
+}) {
   const items = useMemo(() => {
     const arr = [];
+    const [sMin, sMax] = sizeRange;
+    const [oMin, oMax] = opacityRange;
+    const [dMin, dMax] = durRange;
     for (let i = 0; i < count; i++) {
       arr.push({
         left: Math.random() * 100,
         top: Math.random() * 100,
-        size: 1 + Math.random() * 3,
+        size: sMin + Math.random() * (sMax - sMin),
         delay: Math.random() * 5,
-        dur: 2 + Math.random() * 5,
-        op: 0.3 + Math.random() * 0.7,
+        dur: dMin + Math.random() * (dMax - dMin),
+        op: oMin + Math.random() * (oMax - oMin),
       });
     }
     return arr;

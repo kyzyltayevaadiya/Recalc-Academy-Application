@@ -48,7 +48,7 @@ export default function FinalScreen() {
         {stage === 2 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
             <div className="font-display text-[10px] text-quest-gold/80 mt-6 mb-2">CURRENT OBJECTIVE</div>
-            <div className="font-pixel text-3xl text-white mb-10">JOIN {FINALE.academyName}</div>
+            <div className="font-pixel text-3xl text-white mb-10">ACCEPT ME TO {FINALE.academyName}</div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <a href={`mailto:${FINALE.secondary.email}`} className="font-display text-xs text-quest-navy bg-quest-gold px-8 py-4 hover:bg-white transition-colors border-2 border-quest-gold shadow-[0_0_30px_rgba(253,184,19,0.5)]">

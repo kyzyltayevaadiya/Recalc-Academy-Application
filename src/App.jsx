@@ -6,6 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import ScrollToTop from './components/ScrollToTop';
 import Home from '@/pages/Home';
 import CV from '@/pages/CV';
+import EvidenceBook from '@/pages/EvidenceBook';
 // Add page imports here
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           {/* Add your page Route elements here */}
           <Route path="/" element={<Home />} />
           <Route path="/cv" element={<CV />} />
+          <Route path="/evidence" element={<EvidenceBook />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>

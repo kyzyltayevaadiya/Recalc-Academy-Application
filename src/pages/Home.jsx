@@ -14,7 +14,6 @@ import DragonEncounter from "@/components/rpg/scenes/cinematic/DragonEncounter";
 import BossBattleCinematic from "@/components/rpg/scenes/cinematic/BossBattleCinematic";
 import LootSkills from "@/components/rpg/scenes/LootSkills";
 import Inventory from "@/components/rpg/scenes/Inventory";
-import QuestLog from "@/components/rpg/scenes/QuestLog";
 import DragonFlight from "@/components/rpg/scenes/cinematic/DragonFlight";
 import CityArrival from "@/components/rpg/scenes/cinematic/CityArrival";
 import FinanceCity from "@/components/rpg/scenes/FinanceCity";
@@ -96,10 +95,9 @@ export default function Home() {
         <DragonEncounter />
         <BossBattleCinematic onAchievement={unlock} />
 
-        {/* calm beats — the loot, her inventory, the quest log */}
+        {/* calm beats — the loot, her inventory */}
         <LootSkills onAchievement={unlock} />
         <Inventory />
-        <QuestLog />
 
         {/* WOW 5 + 6 — dragon flight and the City of Capital reveal */}
         <DragonFlight />

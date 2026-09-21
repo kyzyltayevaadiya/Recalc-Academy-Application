@@ -40,7 +40,7 @@ export const PROFILE = {
     { label: "Finance XP", value: 6, max: 10 },
     { label: "Ambition", value: 10, max: 10 },
   ],
-  links: { cv: "/cv", linkedin: "https://www.linkedin.com/in/adiya-kyzyltayeva" },
+  links: { cv: "/cv", evidence: "/evidence", linkedin: "https://www.linkedin.com/in/adiya-kyzyltayeva" },
 };
 
 // Academic background + languages, shown as the "CHARACTER RECORDS" panel
@@ -176,7 +176,6 @@ export const CHAPTERS = [
   { id: "battle", label: "Chapter III — Boss Battle", map: "Boss" },
   { id: "loot", label: "Chapter IV — Loot", map: "Treasure" },
   { id: "inventory", label: "Inventory", map: "Inventory" },
-  { id: "questlog", label: "Quest Log", map: "Quests" },
   { id: "flight", label: "Chapter V — Dragon Flight", map: "Flight" },
   { id: "arrival", label: "Chapter V — Arrival", map: "Arrival" },
   { id: "capital", label: "The City of Capital", map: "Capital" },
@@ -317,14 +316,14 @@ export const LOOT = {
   title: "SKILLS ACQUIRED",
   xp: 2500,
   skills: [
-    "ENTREPRENEURSHIP",
-    "FUNDRAISING",
-    "STAKEHOLDER MANAGEMENT",
-    "TEAM LEADERSHIP",
-    "FINANCIAL LITERACY",
-    "PUBLIC SPEAKING",
-    "CROSS-CULTURAL COLLABORATION",
-    "EXECUTION UNDER PRESSURE",
+    "INTELLECTUAL CURIOSITY",
+    "COMMUNICATION",
+    "INITIATIVE",
+    "WORK ETHIC / DRIVE",
+    "RESILIENCE UNDER PRESSURE",
+    "STAKEHOLDER NEGOTIATION",
+    "ADAPTABILITY",
+    "OWNERSHIP / ACCOUNTABILITY",
   ],
   tree: [
     { branch: "BUSINESS", nodes: ["Founded & led 2 ventures, idea to pilot", "Ranked top-10 of 128 applicant companies", "Negotiated a government contract at 19"] },
@@ -367,18 +366,6 @@ export const INVENTORY = {
   ],
 };
 
-export const QUESTLOG = {
-  title: "QUEST LOG",
-  completed: [
-    { name: "Won NURIS Hardware Challenge 3.0", date: "Mar 2023", detail: "₸300,000 for a 3D-printed medical device prototype, built with an all-female high school team." },
-    { name: "Founded AI-Based Early Autism Detection Venture", date: "Apr 2023", detail: "Idea to pilot across 3 government clinics; ~$12,000 raised." },
-    { name: "Won 'Best Social Project 2024'", date: "2024", detail: "Youngest winner in the award's history; featured on EuroNews and at TEDx Astana." },
-    { name: "Admitted to World Bachelor in Business", date: "2026", detail: "Triple-degree program at USC · HKUST · Bocconi (~10% acceptance rate), merit scholarship." },
-  ],
-  current: "LEAD INTERN — SECOND CHANCE AT HIGHER ED",
-  next: "RECALC ACADEMY",
-};
-
 export const CAPITAL = {
   title: "THE CITY OF CAPITAL",
   chapter: "CHAPTER V",
@@ -406,11 +393,11 @@ export const ACADEMY = {
   chapter: "CHAPTER VI",
   name: "RECALC ACADEMY",
   reasons: [
-    "I've built two ventures and raised real funding — what I haven't had is structured time with people who allocate capital for a living, and I want that gap closed deliberately, not by accident.",
-    "I want to learn how professional investors actually think about risk, valuation, and timing — not just how founders pitch for it.",
-    "A World Bachelor in Business gave me three countries and three business schools; I'm looking for an environment just as intense and just as selective to go deeper into finance specifically.",
-    "I bring what most applicants won't: a track record of turning ~$25,000 in combined funding and a government contract into results before turning 20.",
-    "I want to become the kind of investor who still remembers what it felt like to be on the other side of the table, asking someone to believe in an idea with no track record yet.",
+    "I know what it feels like to ask for capital. At Recalc, I want to learn from people who make those allocation decisions for a living — and understand what makes them say yes or no.",
+    "I want to move from using finance when I need it to actually thinking like an investor. Recalc's focus on valuation, investing, and real-world decision-making is exactly the depth I'm looking for.",
+    "I learn fastest when I'm surrounded by people who challenge how I think. Recalc brings together people who are serious about finance, but come to it with different experiences and ambitions.",
+    "I don't want finance to stay theoretical. I want to work through real investment decisions, defend my reasoning, and have people who know the field question it.",
+    "I want to become an investor without losing the founder's perspective. Recalc feels like a place where I can start building that bridge deliberately, rather than figuring it out somewhere along the way.",
   ],
 };
 
