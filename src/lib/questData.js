@@ -203,9 +203,25 @@ export const FOREST = {
   chosen: "⚔️ Path B — Leave",
   notification: "COURAGE +1",
   decisions: [
-    "Led the all-female team through IDA TECH's NURIS Hardware Challenge 3.0 — won ₸300,000 for a 3D-printed skull fixation prototype for neurosurgery, built with accredited medical specialists.",
-    "Months later, founded her own venture from that same instinct: an AI-based early autism detection product, taken from a napkin idea to a real clinical pilot.",
-    "Co-founded a second venture in parallel — a biotech and environmental education initiative — because one leap into the unknown turned out not to be enough.",
+    {
+      title: "Age 12: Choosing the Harder School",
+      body: "Left home and family to attend Kazakhstan's most selective school — full scholarship, <14% acceptance rate. This planted the core lesson: choosing difficulty on purpose pays off.",
+    },
+    {
+      title: "Ages 13–16: Competing Beyond the Curriculum",
+      body: "Repeatedly entered Olympiads (Biology, Math — 1st–3rd place, 2020–2023), joined debate, and applied to National Geographic Kazakhstan's \"Young Explorers\" research course.",
+      traits: "Curiosity: assigned work → sought-out research. Communication: first steps into debate. Initiative: one-off wins → repeated, self-driven entry.",
+    },
+    {
+      title: "Ages 16–17: Competing in Adult, International Arenas",
+      body: "Led a high-school team to win the NURIS Hardware Challenge 3.0 against university competitors, ranked top 10% globally at CERN & DESY's Beamline for Schools, made Kazakhstan's National Debate Pre-Team, and delivered two TEDx talks.",
+      traits: "Curiosity: spans hardware, physics, medicine. Communication: debate club → public stage. Initiative: entering competitions → leading a team into one she wasn't \"qualified\" for, and winning.",
+    },
+    {
+      title: "Ages 17–18: Choosing Finance as the Arena",
+      body: "Attended HSE's Summer Bridge School as the only student from Kazakhstan, then applied to WBB, Jane Street's IN FOCUS, Girls Who Invest, and the Recalc Finance Accelerator — narrowing a broad pattern of competing into one specific industry she'd quietly trained for since managing her own brokerage account at 14.",
+      traits: "Curiosity: broad → markets and capital specifically. Ambition: proving she can compete → building the exact career path. Initiative: entering open competitions → earning her way into gate-kept rooms.",
+    },
   ],
 };
 

@@ -92,7 +92,11 @@ export default function ChapterForest() {
                   className="hud-glass border-l-4 border-emerald-400/60 p-4"
                 >
                   <div className="font-display text-[9px] text-emerald-300 mb-1">DECISION {i + 1}</div>
-                  <div className="font-body text-base text-white/85 leading-relaxed">{d}</div>
+                  <div className="font-pixel text-xl text-white mb-2">{d.title}</div>
+                  <div className="font-body text-base text-white/85 leading-relaxed">{d.body}</div>
+                  {d.traits && (
+                    <div className="font-body text-sm text-quest-gold/80 leading-relaxed mt-3 pt-3 border-t border-emerald-400/20">{d.traits}</div>
+                  )}
                 </motion.div>
               ))}
             </div>
