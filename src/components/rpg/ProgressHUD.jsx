@@ -47,15 +47,15 @@ export default function ProgressHUD({ chapters, activeIndex, progress, onJump })
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
-              className="relative w-full max-w-md hud-glass rpg-border p-6 scanlines"
+              className="relative w-full max-w-md max-h-[85vh] flex flex-col hud-glass rpg-border p-6 scanlines"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 shrink-0">
                 <div className="font-display text-xs text-quest-gold">WORLD MAP</div>
                 <button onClick={() => setOpen(false)} aria-label="Close map">
                   <X className="w-5 h-5 text-quest-gold hover:text-white" />
                 </button>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 overflow-y-auto pr-1">
                 {chapters.map((c, i) => {
                   const done = i < activeIndex;
                   const active = i === activeIndex;
@@ -80,7 +80,7 @@ export default function ProgressHUD({ chapters, activeIndex, progress, onJump })
                   );
                 })}
               </div>
-              <div className="mt-4 font-pixel text-base text-white/50 text-center">Fast travel unlocked. Choose your destination.</div>
+              <div className="mt-4 font-pixel text-base text-white/50 text-center shrink-0">Fast travel unlocked. Choose your destination.</div>
             </motion.div>
           </motion.div>
         )}

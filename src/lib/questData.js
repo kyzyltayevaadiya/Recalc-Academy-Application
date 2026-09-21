@@ -215,12 +215,12 @@ export const FOREST = {
     {
       title: "Ages 16–17: Competing in Adult, International Arenas",
       body: "Led a high-school team to win the NURIS Hardware Challenge 3.0 against university competitors, ranked top 10% globally at CERN & DESY's Beamline for Schools, made Kazakhstan's National Debate Pre-Team, and delivered two TEDx talks.",
-      traits: "Curiosity: spans hardware, physics, medicine. Communication: debate club → public stage. Initiative: entering competitions → leading a team into one she wasn't \"qualified\" for, and winning.",
+      traits: "Curiosity: spans hardware, physics, medicine. Communication: debate club → public stage. Initiative: entering competitions → leading a team into one Adiya wasn't \"qualified\" for, and winning.",
     },
     {
       title: "Ages 17–18: Choosing Finance as the Arena",
-      body: "Attended HSE's Summer Bridge School as the only student from Kazakhstan, then applied to WBB, Jane Street's IN FOCUS, Girls Who Invest, and the Recalc Finance Accelerator — narrowing a broad pattern of competing into one specific industry she'd quietly trained for since managing her own brokerage account at 14.",
-      traits: "Curiosity: broad → markets and capital specifically. Ambition: proving she can compete → building the exact career path. Initiative: entering open competitions → earning her way into gate-kept rooms.",
+      body: "Attended HSE's Summer Bridge School as the only student from Kazakhstan, then applied to WBB, Jane Street's IN FOCUS, Girls Who Invest, and the Recalc Finance Accelerator — narrowing a broad pattern of competing into one specific industry Adiya had quietly trained for since managing her own brokerage account at 14.",
+      traits: "Curiosity: broad → markets and capital specifically. Ambition: proving Adiya can compete → building the exact career path. Initiative: entering open competitions → earning her way into gate-kept rooms.",
     },
   ],
 };
@@ -228,15 +228,44 @@ export const FOREST = {
 export const MOUNTAIN = {
   title: "THE CLIMB",
   chapter: "CHAPTER II",
-  body:
-    "Each checkpoint is a real milestone. The altitude is metaphor for effort — the higher you climb, the more you can see.",
-  checkpoints: [
-    { tag: "BASE CAMP", title: "First Meaningful Project", text: "Led an all-female team to win ₸300,000 at IDA TECH's NURIS Hardware Challenge — the only high school team in the field." },
-    { tag: "CHECKPOINT I", title: "New Skill Learned", text: "Learned to negotiate with institutions, not just customers — securing ~$12,000 in funding and a business-to-government contract with two Kazakh ministries." },
-    { tag: "CHECKPOINT II", title: "Leadership Experience", text: "Mentored 20+ partner organizations on one venture and an international intern cohort on another, while running both alongside a full course load." },
-    { tag: "CHECKPOINT III", title: "Major Achievement", text: "Won Kazakhstan's national 'Best Social Project 2024' award — the youngest winner in its history, covered by EuroNews and TEDx Astana." },
-    { tag: "SUMMIT", title: "The Realization", text: "Two ventures, two rounds of funding, one contract with a government — and a growing conviction that the next skill to build was knowing where capital should go." },
+  narration:
+    "There was a problem I noticed that almost no one around me was paying attention to: autism spectrum diagnosis in my country happened too late, and with each new generation, cases kept rising. I didn't know where to start. I only knew that someone had to.",
+  stages: [
+    {
+      tag: "STAGE 1",
+      title: "Research",
+      text: "For several years, I studied the problem itself: why ASD rates were rising in the new generation, why diagnosis in the country lagged so far behind that children were losing critical time for early intervention. It was scientific work with no ready-made answer at the end — but without understanding the problem, there was nothing to solve it with.",
+      progress: 15,
+      tone: "ice",
+    },
+    {
+      tag: "STAGE 2",
+      title: "The First Wall",
+      text: "The research moved forward. Progress on actually solving the problem didn't. Understanding the problem alone changed nothing. That's when I asked myself the question that redirected everything: what if I stopped just studying it, and tried to solve it instead?\n\nI put together a team. We started sketching out early versions of a solution — and rewrote them again, and again, and again. Not a single draft survived first contact with reality.",
+      progress: 35,
+      tone: "ice",
+    },
+    {
+      tag: "STAGE 3",
+      title: "Trial by Fire",
+      text: "To learn how to turn an idea into a product that could actually reach the market, we started applying to competitions and accelerators one after another — each one adding something the team was missing without real-world experience.",
+      tone: "ember",
+    },
+    {
+      tag: "STAGE 4",
+      title: "So Close",
+      text: "Technovation Girls. National round. Some of the highest scores of any participant that year. We were one step away from the global stage.\n\nAnd we didn't make it.\n\nAfter years of work, it would have been easier to stop here than to keep going. It felt like there was simply no path forward.",
+      progress: 68,
+      tone: "crimson",
+    },
+    {
+      tag: "STAGE 5",
+      title: "One Last Shot",
+      text: "That's when my mentor refused to let me stop. She insisted there was one more chance — the \"Astana Smart City\" accelerator. The problem was, we didn't meet half the selection criteria. The team was too young, too inexperienced, without the background usually required.\n\nWe agreed: this was the last attempt. If it didn't work, I could walk away with a clear conscience.\n\nWe applied. And got in!",
+      tone: "gold",
+    },
   ],
+  cliffhanger: "But we didn't expect what happened next…",
   dragonReveal: "Something enormous appears on the horizon.",
 };
 
@@ -245,27 +274,37 @@ export const DRAGON = {
   chapter: "BOSS BATTLE",
   bossName: "UNCERTAINTY",
   intro:
-    "AI-Based Early Autism Detection Venture — built to get screening into the hands of families faster than the system usually allows. The dragon was every reason a field of 128 companies said it wouldn't work.",
+    "AI-Based Early Autism Detection Venture — built to get screening into the hands of families faster than the system usually allows. I treated every challenge to finish the Astana Smart City Governmental Accelerator as a dragon fight.",
   rounds: [
     {
-      attack: "NO RESOURCES",
-      response: "RESOURCEFULNESS",
-      detail: "With no revenue and no big backers, raised ~$12,000 and negotiated Kazakhstan's Ministries of Health and Digitalization into a business-to-government contract.",
+      title: "“You Don’t Belong Here”",
+      tag: "Insufficient credibility. Insufficient resources.",
+      situation: "Selected among ~40 teams out of 100+ applicants — but almost every other team was an established, operating company. The minimum competitor age was 28; most were 35–40+. My team: high schoolers with a pre-seed idea. We were not taken seriously from day one.",
+      response: "I didn't try to look older or more experienced than I was. I let the results speak instead — and committed to three months of weekly tracking sessions where I'd have to prove it, over and over, in front of everyone.",
     },
     {
-      attack: "UNCERTAINTY",
-      response: "ITERATION",
-      detail: "Coordinated a two-month pilot across three major clinics, refining the product against real clinical settings instead of a pitch deck.",
+      title: "Weekly Public Judgment",
+      tag: "Brutal, public scrutiny — every single week.",
+      situation: "Every Sunday morning, half the cohort gathered. Each team presented their week's results on stage — what was planned, what was delivered. Most teams finished in 15–20 minutes. My team was regularly grilled for 40 minutes to 2 hours — the harshest questioning in the room, every week, while also finishing my final year of IB and doing TV appearances on the side.",
+      response: "I stopped treating it as personal and started treating it as training. Every brutal session taught me to defend results under pressure, adapt fast, and deliver on tight deadlines — skills no classroom could have given me.",
     },
     {
-      attack: "128 COMPETITORS",
-      response: "PROVE IT WITH RESULTS",
-      detail: "Went up against 128 applicant companies evaluated by Astana Hub, the Government of Astana, and Astana Innovations — and became the only top-10 startup to secure three government clinic partnerships (peer average: one).",
+      title: "“You Won’t Be Able To”",
+      tag: "Doubt from the top.",
+      situation: "The program required partnerships with established specialists in our field — something we had none of. When I said we'd secure a collaboration with the country's largest autism support foundation, my tracker told me flatly: “You can try. I'm fairly sure you won't manage it.”",
+      response: "I took it personally — as a challenge, not an insult. I went straight to the foundation's head office, met with their representatives, and pitched the project's purpose and social significance myself. By the next tracking session, I had the partnership signed.",
     },
     {
-      attack: "NO CLEAR ROADMAP",
-      response: "BUILD ONE",
-      detail: "There was no playbook for negotiating with two government ministries as a teenager — so the pilot structure, clinic rollout plan, and reporting process were built from scratch.",
+      title: "“Do You Really Think You Can Handle That?”",
+      tag: "Being underestimated at the moment that mattered most.",
+      situation: "Only 10 of the 30+ remaining companies would be cleared to pursue a real government contract. Asked how many clinics I could realistically cover, my tracker pushed: “Do you believe in yourself enough to handle three?” I didn't know yet that every other company was proposing just one institution.",
+      response: "I said yes — and meant it. I was the only founder who submitted a proposal covering three government institutions instead of one. It got approved. My startup ended up piloting across three major clinics plus two additional departments — effectively five points of operation, while every competitor ran one.",
+    },
+    {
+      title: "The System Itself",
+      tag: "Bureaucracy, institutional resistance, and a funding gap.",
+      situation: "Running the actual pilot meant fighting an entrenched medical system that resisted change at every level, dealing with senior hospital directors who rarely took a teenage founder seriously, and facing a government restructuring that delayed funding entirely — forcing me to find emergency outside financing just to launch the pilot on time. Most companies at this stage quietly dropped out.",
+      response: "I stayed flexible instead of rigid, found creative funding to cover the gap, and kept pushing through every bureaucratic layer until I reached the people who could actually approve what a local office couldn't. I didn't quit — even when quitting was the easier, more common choice.",
     },
   ],
   result:

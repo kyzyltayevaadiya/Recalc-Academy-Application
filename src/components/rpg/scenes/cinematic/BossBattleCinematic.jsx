@@ -66,7 +66,7 @@ export default function BossBattleCinematic({ onAchievement }) {
 
   const handleContinue = () => {
     setPhase("hit");
-    setBossHp((h) => Math.max(0, h - 25));
+    setBossHp((h) => Math.max(0, h - 20));
     after(HIT_HOLD_MS, () => {
       const next = roundIndex + 1;
       if (next >= ROUNDS.length) {
@@ -158,34 +158,34 @@ export default function BossBattleCinematic({ onAchievement }) {
           {(phase === "attack" || phase === "response" || phase === "hit") && (
             <motion.div
               key={`${roundIndex}-${phase === "attack" ? "problem" : "resolved"}`}
-              initial={{ opacity: 0, y: 24, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -12 }}
+              initial={{ opacity: 0, x: "-50%", y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, x: "-50%", y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: "-50%", y: -12 }}
               transition={{ type: "spring", stiffness: 240, damping: 20 }}
-              className="absolute left-1/2 bottom-[6%] -translate-x-1/2 z-30 w-[86vw] sm:w-[480px] hud-glass border-2 border-quest-crimson/70 px-6 py-5 scanlines text-center"
+              className="absolute left-1/2 bottom-[4%] z-30 w-[80vw] sm:w-[420px] hud-glass border-2 border-quest-crimson/70 px-4 py-4 scanlines text-center"
             >
-              <div className="font-display text-[8px] text-white/40 tracking-[0.3em] mb-3">CHALLENGE {roundIndex + 1} / {ROUNDS.length}</div>
+              <div className="font-display text-[8px] text-white/40 tracking-[0.3em] mb-3">ATTACK {roundIndex + 1} / {ROUNDS.length}</div>
 
               {phase === "attack" ? (
                 <>
-                  <div className="font-display text-[8px] text-quest-crimson tracking-[0.35em] mb-2">CHALLENGE</div>
-                  <div className="font-pixel text-2xl sm:text-4xl text-[#ff5a4a] text-shadow-pixel leading-snug">{round.attack}</div>
+                  <div className="font-pixel text-lg sm:text-xl text-[#ff5a4a] text-shadow-pixel leading-snug mb-2">{round.title}</div>
+                  <div className="font-display text-[8px] text-quest-crimson/90 tracking-wide mb-2">🐉 {round.tag}</div>
+                  <div className="font-body text-xs sm:text-sm text-white/80 leading-relaxed">{round.situation}</div>
                   <button
                     onClick={handleAttack}
-                    className="mt-6 font-display text-xs sm:text-sm text-quest-navy bg-quest-gold px-6 py-3 hover:bg-white transition-colors border-2 border-quest-gold shadow-[0_0_30px_rgba(253,184,19,0.5)] tracking-widest"
+                    className="mt-4 font-display text-[10px] sm:text-xs text-quest-navy bg-quest-gold px-5 py-2.5 hover:bg-white transition-colors border-2 border-quest-gold shadow-[0_0_30px_rgba(253,184,19,0.5)] tracking-widest"
                   >
-                    ▶ ATTACK
+                    ⚔️ ATTACK
                   </button>
                 </>
               ) : (
                 <>
                   <div className="font-display text-[8px] text-quest-gold tracking-[0.35em] mb-2">HOW SHE RESPONDED</div>
-                  <div className="font-pixel text-xl sm:text-3xl text-quest-gold text-shadow-glow mb-3">{round.response}</div>
-                  <div className="font-body text-sm text-white/85 leading-snug">{round.detail}</div>
+                  <div className="font-body text-xs sm:text-sm text-white/90 leading-relaxed">{round.response}</div>
                   {phase === "response" && (
                     <button
                       onClick={handleContinue}
-                      className="mt-5 font-display text-xs sm:text-sm text-quest-navy bg-quest-gold px-6 py-3 hover:bg-white transition-colors border-2 border-quest-gold shadow-[0_0_30px_rgba(253,184,19,0.5)] tracking-widest"
+                      className="mt-4 font-display text-[10px] sm:text-xs text-quest-navy bg-quest-gold px-5 py-2.5 hover:bg-white transition-colors border-2 border-quest-gold shadow-[0_0_30px_rgba(253,184,19,0.5)] tracking-widest"
                     >
                       ▶ CONTINUE
                     </button>
@@ -215,14 +215,14 @@ export default function BossBattleCinematic({ onAchievement }) {
         {/* the taming */}
         <AnimatePresence>
           {phase === "tame" && (
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
-              className="absolute left-1/2 top-[14%] -translate-x-1/2 z-30 text-center pointer-events-none">
-              <div className="font-pixel text-2xl sm:text-4xl text-quest-ice text-shadow-pixel">she reached out…</div>
+            <motion.div initial={{ opacity: 0, x: "-50%", scale: 0.9 }} animate={{ opacity: 1, x: "-50%", scale: 1 }} exit={{ opacity: 0, x: "-50%" }}
+              className="absolute left-1/2 top-[14%] z-30 text-center pointer-events-none">
+              <div className="font-pixel text-2xl sm:text-4xl text-quest-ice text-shadow-pixel">Adiya reached out…</div>
             </motion.div>
           )}
           {phase === "achieve" && (
-            <motion.div initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-              className="absolute left-1/2 top-[10%] -translate-x-1/2 z-30 text-center hud-glass rpg-border px-8 py-5 scanlines pointer-events-none">
+            <motion.div initial={{ x: "-50%", y: -40, opacity: 0 }} animate={{ x: "-50%", y: 0, opacity: 1 }}
+              className="absolute left-1/2 top-[10%] z-30 w-[90vw] sm:w-auto text-center hud-glass rpg-border px-8 py-5 scanlines pointer-events-none">
               <div className="font-display text-[9px] text-quest-gold tracking-[0.3em]">ACHIEVEMENT UNLOCKED</div>
               <div className="font-pixel text-3xl sm:text-5xl text-quest-gold text-shadow-glow mt-1">TAMED THE UNKNOWN</div>
               <div className="font-body text-sm text-white/80 mt-3 max-w-md">{DRAGON.transformation}</div>

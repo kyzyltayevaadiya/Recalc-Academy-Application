@@ -1,48 +1,89 @@
-import React from "react";
-import { motion, useTransform } from "framer-motion";
-import Stage, { useStage, usePace } from "@/components/rpg/scroll/Stage";
+import React, { useState } from "react";
+import { motion, useTransform, useMotionValueEvent } from "framer-motion";
+import Stage, { useStage } from "@/components/rpg/scroll/Stage";
 import Heroine from "@/components/rpg/Heroine";
 import Dragon from "@/components/rpg/Dragon";
 import ParticleField from "@/components/rpg/ParticleField";
 import { MOUNTAIN } from "@/lib/questData";
 
-function Checkpoint({ progress, range, pos, tag, title, text }) {
-  const op = useTransform(progress, [range[0], range[0] + 0.05, range[1] - 0.05, range[1]], [0, 1, 1, 0]);
-  const y = useTransform(progress, [range[0], range[0] + 0.06], [26, 0]);
+const TONE = {
+  ice: { border: "border-quest-ice/70", tag: "text-quest-ice", bar: "from-quest-ice to-white" },
+  ember: { border: "border-quest-ember/70", tag: "text-quest-ember", bar: "from-quest-ember to-quest-gold" },
+  crimson: { border: "border-quest-crimson/70", tag: "text-quest-crimson", bar: "from-quest-crimson to-quest-ember" },
+  gold: { border: "border-quest-gold/70", tag: "text-quest-gold", bar: "from-quest-gold to-white" },
+};
+
+// A large, centered story card — the climb's real content. Each beat gets its
+// own scroll range and a tonal color (calm research vs. crimson near-failure
+// vs. gold breakthrough). Width is capped, not fixed, so it never runs off
+// the edge of a narrower viewport (e.g. a browser window with devtools open).
+function StoryBeat({ progress, range, tag, title, text, tone = "ice" }) {
+  const t = TONE[tone] || TONE.ice;
+  const op = useTransform(progress, [range[0], range[0] + 0.035, range[1] - 0.035, range[1]], [0, 1, 1, 0]);
+  const y = useTransform(progress, [range[0], range[0] + 0.05], [28, 0]);
+
   return (
-    <motion.div style={{ opacity: op, y }} className={`absolute w-52 sm:w-64 hud-glass border-l-4 border-quest-ice/70 p-3 will-change-transform ${pos}`}>
-      <div className="font-display text-[8px] text-quest-ice">{tag}</div>
-      <div className="font-pixel text-lg text-white leading-tight">{title}</div>
-      <div className="font-body text-xs text-white/75 leading-snug mt-1">{text}</div>
+    <motion.div
+      style={{ opacity: op, x: "-50%", y }}
+      className={`absolute left-1/2 top-[24%] z-30 w-[90vw] max-w-[600px] hud-glass border-2 ${t.border} scanlines px-6 py-6 sm:px-8 sm:py-7 will-change-transform`}
+    >
+      <div className={`font-display text-[9px] sm:text-[10px] ${t.tag} tracking-[0.3em] mb-3`}>
+        {tag}{title ? ` — ${title.toUpperCase()}` : ""}
+      </div>
+      <div className="font-pixel text-lg sm:text-2xl leading-snug text-white whitespace-pre-line">{text}</div>
     </motion.div>
   );
 }
 
-const CP = MOUNTAIN.checkpoints;
+const ST = MOUNTAIN.stages;
 
-// WOW 2: the forest thins, rocks rise, and a gigantic mountain emerges through clouds.
-// The camera then climbs diagonally past real milestone checkpoints to the summit.
+// WOW 2: the forest thins, rocks rise, and a gigantic mountain emerges through
+// clouds. The climb itself carries the real origin story of the autism
+// venture — research, the first failed drafts, the near-miss, the last shot —
+// told as large, prominent story cards instead of small side-pinned tags.
 export default function MountainPassage() {
   const { ref, progress } = useStage();
-  const pace = usePace(progress);
 
-  const forestY = useTransform(progress, [0.12, 0.34], ["0vh", "40vh"]);
-  const forestOp = useTransform(progress, [0.12, 0.32], [1, 0]);
-  const mountainScale = useTransform(progress, [0.14, 0.44], [0.35, 1.25]);
-  const mountainY = useTransform(progress, [0.14, 0.44], ["18vh", "0vh"]);
-  const mountainOp = useTransform(progress, [0.14, 0.3], [0, 1]);
-  const climbX = useTransform(progress, [0.46, 1], ["0%", "-16%"]);
-  const climbY = useTransform(progress, [0.46, 1], ["0%", "9%"]);
-  const cloud1 = useTransform(progress, [0.16, 0.6], ["-30vw", "120vw"]);
-  const cloud2 = useTransform(progress, [0.25, 0.7], ["120vw", "-40vw"]);
-  const snowOp = useTransform(progress, [0.4, 0.6], [0, 1]);
-  const pathLen = useTransform(progress, [0.46, 0.92], [0, 1]);
-  const summitOp = useTransform(progress, [0.9, 0.96], [0, 1]);
+  const forestY = useTransform(progress, [0.08, 0.24], ["0vh", "40vh"]);
+  const forestOp = useTransform(progress, [0.08, 0.22], [1, 0]);
+  const mountainScale = useTransform(progress, [0.1, 0.5], [0.35, 1.25]);
+  const mountainY = useTransform(progress, [0.1, 0.5], ["18vh", "0vh"]);
+  const mountainOp = useTransform(progress, [0.1, 0.2], [0, 1]);
+  const climbX = useTransform(progress, [0.16, 1], ["0%", "-16%"]);
+  const climbY = useTransform(progress, [0.16, 1], ["0%", "9%"]);
+  const cloud1 = useTransform(progress, [0.1, 0.9], ["-30vw", "120vw"]);
+  const cloud2 = useTransform(progress, [0.2, 0.95], ["120vw", "-40vw"]);
+  const snowOp = useTransform(progress, [0.5, 0.62], [0, 1]);
+  const pathLen = useTransform(progress, [0.16, 0.9], [0, 1]);
+  const titleOp = useTransform(progress, [0, 0.05], [1, 0]);
+
+  const narrationOp = useTransform(progress, [0.03, 0.07, 0.13, 0.16], [0, 1, 1, 0]);
+  const narrationY = useTransform(progress, [0.03, 0.08], [28, 0]);
+
+  const cliffOp = useTransform(progress, [0.89, 0.93], [0, 1]);
   const dragonOp = useTransform(progress, [0.93, 0.99], [0, 1]);
-  const titleOp = useTransform(progress, [0, 0.08], [1, 0]);
+
+  // one continuous climb-progress readout: rises to each real checkpoint
+  // (15% / 35% / 68%) as she reaches it, then to 100% at the summit — never
+  // resets between story beats the way a bar embedded in each card would.
+  const climbPctMV = useTransform(progress, [0, 0.18, 0.29, 0.45, 0.75, 0.9, 1], [0, 0, 15, 35, 68, 100, 100]);
+  const climbBarWidth = useTransform(climbPctMV, (v) => `${v}%`);
+  const [climbPct, setClimbPct] = useState(0);
+  useMotionValueEvent(climbPctMV, "change", (v) => setClimbPct(Math.round(v)));
+
+  // Stage 4 ("So Close") — right where the text turns ("And we didn't make
+  // it."), her grip slips and she slides down the slope before catching
+  // herself: climb -> knocked (falling) -> rise (recovering) -> climb.
+  const fallX = useTransform(progress, [0.6, 0.64, 0.7, 0.73, 0.76], [0, 30, 34, 6, 0]);
+  const fallY = useTransform(progress, [0.6, 0.64, 0.7, 0.73, 0.76], [0, 60, 64, 12, 0]);
+  const fallRot = useTransform(progress, [0.6, 0.64, 0.7, 0.73, 0.76], [0, -24, -20, -4, 0]);
+  const [heroineState, setHeroineState] = useState("climb");
+  useMotionValueEvent(progress, "change", (v) => {
+    setHeroineState(v < 0.63 ? "climb" : v < 0.71 ? "knocked" : v < 0.76 ? "rise" : "climb");
+  });
 
   return (
-    <Stage vh={460} id="mountain" stageRef={ref} className="bg-quest-navy-deep">
+    <Stage vh={820} id="mountain" stageRef={ref} className="bg-quest-navy-deep">
       {/* cold sky */}
       <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, #16305e 0%, #2a4a78 45%, #4a6a94 100%)" }} />
 
@@ -90,30 +131,51 @@ export default function MountainPassage() {
         <ParticleField variant="snow" count={26} />
       </motion.div>
 
-      {/* the heroine, climbing */}
-      <div className="absolute bottom-[16%] left-[30%] z-20">
-        <Heroine state={pace === "idle" ? "climb" : "climb"} facing="right" size={110} />
+      {/* the heroine, climbing — and, at "So Close", almost losing her grip */}
+      <motion.div style={{ x: fallX, y: fallY, rotate: fallRot }} className="absolute bottom-[16%] left-[30%] z-20 will-change-transform">
+        <Heroine state={heroineState} facing="right" size={110} />
+      </motion.div>
+
+      {/* opening narration — the problem, before the climb begins */}
+      <motion.div style={{ opacity: narrationOp, x: "-50%", y: narrationY }} className="absolute left-1/2 top-[26%] z-30 w-[88vw] max-w-[560px] hud-glass rpg-border scanlines px-6 py-6 sm:px-8 sm:py-7 will-change-transform">
+        <div className="font-display text-[9px] text-quest-gold tracking-[0.3em] mb-3">THE PROBLEM</div>
+        <div className="font-pixel text-lg sm:text-2xl leading-snug text-white">{MOUNTAIN.narration}</div>
+      </motion.div>
+
+      {/* the real story, told as five large beats up the mountain */}
+      <StoryBeat progress={progress} range={[0.18, 0.29]} tag={ST[0].tag} title={ST[0].title} text={ST[0].text} tone={ST[0].tone} />
+      <StoryBeat progress={progress} range={[0.31, 0.45]} tag={ST[1].tag} title={ST[1].title} text={ST[1].text} tone={ST[1].tone} />
+      <StoryBeat progress={progress} range={[0.47, 0.57]} tag={ST[2].tag} title={ST[2].title} text={ST[2].text} tone={ST[2].tone} />
+      <StoryBeat progress={progress} range={[0.59, 0.75]} tag={ST[3].tag} title={ST[3].title} text={ST[3].text} tone={ST[3].tone} />
+      <StoryBeat progress={progress} range={[0.77, 0.9]} tag={ST[4].tag} title={ST[4].title} text={ST[4].text} tone={ST[4].tone} />
+
+      {/* one continuous climb-progress bar for the whole chapter, instead of
+          each card resetting its own — it only ever rises, at the exact
+          checkpoints given (15% / 35% / 68%), ending at the summit. */}
+      <div className="absolute top-16 sm:top-4 left-1/2 -translate-x-1/2 z-40 w-[80vw] max-w-[380px] hud-glass border border-quest-ice/50 px-4 py-2 scanlines pointer-events-none">
+        <div className="flex justify-between font-display text-[8px] text-quest-ice mb-1.5">
+          <span>THE CLIMB</span>
+          <span>{climbPct}%</span>
+        </div>
+        <div className="h-2.5 bg-quest-navy-deep border border-quest-ice/40 overflow-hidden">
+          <motion.div style={{ width: climbBarWidth }} className="h-full bg-gradient-to-r from-quest-ice to-quest-gold" />
+        </div>
       </div>
 
-      {/* milestone checkpoints along the ascent */}
-      <Checkpoint progress={progress} range={[0.48, 0.6]} pos="left-[6%] top-[20%]" tag={CP[0].tag} title={CP[0].title} text={CP[0].text} />
-      <Checkpoint progress={progress} range={[0.6, 0.72]} pos="right-[6%] top-[28%]" tag={CP[1].tag} title={CP[1].title} text={CP[1].text} />
-      <Checkpoint progress={progress} range={[0.72, 0.83]} pos="left-[8%] top-[36%]" tag={CP[2].tag} title={CP[2].title} text={CP[2].text} />
-      <Checkpoint progress={progress} range={[0.83, 0.9]} pos="right-[8%] top-[44%]" tag={CP[3].tag} title={CP[3].title} text={CP[3].text} />
-
-      {/* summit */}
-      <motion.div style={{ opacity: summitOp }} className="absolute left-1/2 top-[12%] -translate-x-1/2 z-30 text-center pointer-events-none">
-        <div className="font-display text-[9px] text-quest-ice tracking-widest">CHECKPOINT REACHED</div>
-        <div className="font-pixel text-3xl text-white text-shadow-pixel mt-1">{CP[4].tag} — {CP[4].title}</div>
-        <div className="font-body text-sm text-white/80 mt-2 max-w-md">{CP[4].text}</div>
+      {/* the cliffhanger, right at the summit */}
+      <motion.div style={{ opacity: cliffOp }} className="absolute left-1/2 top-[22%] -translate-x-1/2 z-30 text-center pointer-events-none px-4">
+        <div className="font-display text-[9px] text-quest-crimson tracking-widest mb-2">SUMMIT REACHED</div>
+        <motion.div animate={{ opacity: [1, 0.55, 1] }} transition={{ duration: 1.6, repeat: Infinity }} className="font-pixel text-2xl sm:text-4xl text-white text-shadow-pixel">
+          {MOUNTAIN.cliffhanger}
+        </motion.div>
       </motion.div>
 
       {/* something enormous on the horizon */}
       <motion.div style={{ opacity: dragonOp }} className="absolute right-[16%] top-[6%] z-10">
         <Dragon state="fly" silhouette size={130} />
       </motion.div>
-      <motion.div style={{ opacity: dragonOp }} className="absolute left-1/2 top-[26%] -translate-x-1/2 z-30 font-pixel text-xl text-white/80 animate-flicker pointer-events-none">
-        {MOUNTAIN.dragonReveal}
+      <motion.div style={{ opacity: dragonOp }} className="absolute left-1/2 top-[42%] -translate-x-1/2 z-30 pointer-events-none">
+        <div className="font-pixel text-xl text-white/80 animate-flicker">{MOUNTAIN.dragonReveal}</div>
       </motion.div>
 
       {/* chapter title */}
