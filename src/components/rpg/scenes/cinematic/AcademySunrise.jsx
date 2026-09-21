@@ -112,7 +112,7 @@ export default function AcademySunrise({ onAchievement }) {
 
       {/* beats */}
       <motion.div style={{ opacity: titleOp }} className="absolute top-[12%] left-1/2 -translate-x-1/2 z-30 text-center pointer-events-none">
-        <div className="font-display text-[9px] text-white/60 tracking-[0.3em]">CHAPTER VII</div>
+        <div className="font-display text-[9px] text-white/60 tracking-[0.3em]">CHAPTER VI</div>
         <div className="font-pixel text-4xl text-white text-shadow-pixel">THE LAST ROAD</div>
       </motion.div>
       <motion.div style={{ opacity: gatesTextOp }} className="absolute left-1/2 top-[18%] -translate-x-1/2 z-30 text-center pointer-events-none">

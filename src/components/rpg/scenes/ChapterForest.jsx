@@ -27,36 +27,42 @@ export default function ChapterForest() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="font-body text-lg text-white/80 leading-relaxed text-center max-w-2xl mx-auto mb-12"
+          className="font-body text-lg text-white/80 leading-relaxed text-center max-w-2xl mx-auto mb-12 whitespace-pre-line"
         >
           {FOREST.body}
         </motion.p>
 
         {/* Branching roads */}
         {!chosen ? (
-          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {FOREST.roads.map((road, i) => {
-              const isUnknown = road.label === FOREST.chosen;
-              return (
-                <motion.button
-                  key={road.label}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
-                  onClick={() => isUnknown && setChosen(true)}
-                  className={`hud-glass border-2 p-6 text-left transition-colors ${
-                    isUnknown
-                      ? "border-quest-gold/60 hover:border-quest-gold cursor-pointer"
-                      : "border-white/20 opacity-60"
-                  }`}
-                >
-                  <div className="font-display text-sm text-white mb-2">{road.label} →</div>
-                  <div className="font-body text-sm text-white/70">{road.desc}</div>
-                  {isUnknown && <div className="font-pixel text-base text-quest-gold mt-3">▶ take this path</div>}
-                </motion.button>
-              );
-            })}
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-6">
+              <div className="font-display text-[9px] sm:text-xs text-quest-gold tracking-[0.3em] mb-2">{FOREST.forkLabel}</div>
+              <div className="font-pixel text-xl text-white">{FOREST.forkIntro}</div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {FOREST.roads.map((road, i) => {
+                const isUnknown = road.label === FOREST.chosen;
+                return (
+                  <motion.button
+                    key={road.label}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15 }}
+                    onClick={() => isUnknown && setChosen(true)}
+                    className={`hud-glass border-2 p-6 text-left transition-colors ${
+                      isUnknown
+                        ? "border-quest-gold/60 hover:border-quest-gold cursor-pointer"
+                        : "border-white/20 opacity-60"
+                    }`}
+                  >
+                    <div className="font-display text-sm text-white mb-2">{road.label} →</div>
+                    <div className="font-body text-sm text-white/70">{road.desc}</div>
+                    {isUnknown && <div className="font-pixel text-base text-quest-gold mt-3">▶ take this path</div>}
+                  </motion.button>
+                );
+              })}
+            </div>
           </div>
         ) : (
           <motion.div

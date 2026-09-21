@@ -6,7 +6,7 @@ import RPGDialog from "@/components/rpg/RPGDialog";
 import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
 
-export default function HeroScene({ onStart, onProfile }) {
+export default function HeroScene({ onStart }) {
   const [dialog, setDialog] = useState(false);
 
   const handleStart = () => {
@@ -67,19 +67,13 @@ export default function HeroScene({ onStart, onProfile }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+          className="mt-10 flex items-center justify-center"
         >
           <button
             onClick={handleStart}
             className="group relative font-display text-xs sm:text-sm text-quest-navy bg-quest-gold px-8 py-4 hover:bg-white transition-colors border-2 border-quest-gold shadow-[0_0_30px_rgba(253,184,19,0.5)]"
           >
             ▶ {HERO.startLabel}
-          </button>
-          <button
-            onClick={onProfile}
-            className="font-display text-[10px] sm:text-xs text-quest-gold/80 hover:text-quest-gold border-2 border-quest-gold/40 hover:border-quest-gold px-6 py-4 transition-colors"
-          >
-            {HERO.profileLabel}
           </button>
         </motion.div>
 

@@ -81,9 +81,9 @@ export default function CityArrival() {
 
       {/* the dragon lands; she dismounts and walks toward the gate */}
       <motion.div style={{ x: dX, y: dY, scale: dScale }} className="absolute left-[6%] bottom-[6%] z-20 will-change-transform">
-        <Dragon state={beat === "descend" ? "flying" : "calm"} facing="right" size="min(36vw, 400px)" />
+        <Dragon state={beat === "descend" ? "ride" : "calm"} facing="right" size="min(36vw, 400px)" />
         {beat === "descend" && (
-          <div className="absolute left-[32%] -top-8"><Heroine state="ride" size={64} /></div>
+          <div className="absolute left-[44%] top-[24%] -translate-x-1/2"><Heroine state="ride" size={54} /></div>
         )}
       </motion.div>
       <motion.div style={{ opacity: girlOp, x: girlX }} className="absolute bottom-[4%] left-[10%] z-20 will-change-transform">

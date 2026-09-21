@@ -110,7 +110,7 @@ export default function MountainPassage() {
 
       {/* something enormous on the horizon */}
       <motion.div style={{ opacity: dragonOp }} className="absolute right-[16%] top-[6%] z-10">
-        <Dragon state="silhouette" size={130} />
+        <Dragon state="fly" silhouette size={130} />
       </motion.div>
       <motion.div style={{ opacity: dragonOp }} className="absolute left-1/2 top-[26%] -translate-x-1/2 z-30 font-pixel text-xl text-white/80 animate-flicker pointer-events-none">
         {MOUNTAIN.dragonReveal}
@@ -118,7 +118,7 @@ export default function MountainPassage() {
 
       {/* chapter title */}
       <motion.div style={{ opacity: titleOp }} className="absolute top-[12%] left-1/2 -translate-x-1/2 z-30 text-center">
-        <div className="font-display text-[9px] text-white/60 tracking-[0.3em]">CHAPTER III</div>
+        <div className="font-display text-[9px] text-white/60 tracking-[0.3em]">CHAPTER II</div>
         <div className="font-pixel text-4xl text-white text-shadow-pixel">THE CLIMB</div>
       </motion.div>
     </Stage>

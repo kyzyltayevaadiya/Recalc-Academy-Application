@@ -99,9 +99,10 @@ export default function DragonFlight() {
       <motion.div style={{ x: mountX, y: mountY }} className="absolute left-[24%] top-[40%] z-20 will-change-transform">
         <motion.div animate={{ y: [-8, 8, -8] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}>
           <div className="relative">
-            <Dragon state="flying" facing="right" size="min(44vw, 440px)" />
-            <div className="absolute left-[30%] -top-9">
-              <Heroine state={beat === "horizon" ? "discover" : "ride"} facing="right" size={72} />
+            <Dragon state="ride" facing="right" size="min(44vw, 440px)" />
+            {/* seated on the drawn saddle, roughly a third of the way down the dragon's back */}
+            <div className="absolute left-[58%] top-[30%] -translate-x-1/2">
+              <Heroine state={beat === "horizon" ? "discover" : "ride"} facing="right" size={54} />
             </div>
           </div>
         </motion.div>

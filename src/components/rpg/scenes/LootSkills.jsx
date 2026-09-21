@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LOOT } from "@/lib/questData";
+import { LOOT, ARTIFACT } from "@/lib/questData";
 import ChapterHeading from "@/components/rpg/ChapterHeading";
+import Heroine from "@/components/rpg/Heroine";
+import govLetter from "@/assets/gov-letter.png";
+
+// scattered around the sealed original to sell it as the rarest pull from the chest
+const SPARKLES = [
+  { glyph: "✦", style: { top: "-12px", left: "-10px", fontSize: "20px" }, delay: 0 },
+  { glyph: "✧", style: { top: "-16px", right: "18%", fontSize: "13px" }, delay: 0.6 },
+  { glyph: "⋆", style: { top: "22%", right: "-14px", fontSize: "15px" }, delay: 1.2 },
+  { glyph: "✦", style: { bottom: "-12px", right: "-10px", fontSize: "20px" }, delay: 0.3 },
+  { glyph: "✧", style: { bottom: "-16px", left: "22%", fontSize: "13px" }, delay: 0.9 },
+  { glyph: "⋆", style: { top: "55%", left: "-14px", fontSize: "15px" }, delay: 1.5 },
+];
 
 export default function LootSkills({ onAchievement }) {
   const [opened, setOpened] = useState(false);
@@ -15,18 +27,13 @@ export default function LootSkills({ onAchievement }) {
     <section id="loot" className="relative min-h-screen w-full overflow-hidden py-20 px-4 scanlines"
       style={{ background: "linear-gradient(to bottom, #1A2F20 0%, #0d1f14 100%)" }}>
       <div className="relative z-10 max-w-4xl mx-auto">
-        <ChapterHeading chapter="CHAPTER V" title="THE TREASURE" accent="text-quest-gold" />
+        <ChapterHeading chapter="CHAPTER IV" title="THE TREASURE" accent="text-quest-gold" />
 
         {/* Treasure chest */}
         <div className="flex flex-col items-center mb-12">
-          <motion.button
-            onClick={open}
-            whileHover={{ scale: opened ? 1 : 1.05 }}
-            className="text-7xl select-none"
-            aria-label="Open treasure chest"
-          >
-            {opened ? "💎" : "🧰"}
-          </motion.button>
+          <button onClick={open} className="select-none" aria-label="Open treasure chest">
+            <Heroine state={opened ? "celebrate" : "open"} size={110} />
+          </button>
           {!opened && (
             <div className="font-pixel text-lg text-quest-gold mt-3 animate-float-slow">▶ click to open</div>
           )}
@@ -76,6 +83,63 @@ export default function LootSkills({ onAchievement }) {
                   LEVEL UP!
                 </motion.div>
               </div>
+
+              {/* Rarest find in the chest: the government's own seal on the work */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ type: "spring", stiffness: 160, damping: 18 }}
+                className="relative pt-2"
+              >
+                <div className="text-center mb-6">
+                  <div className="font-display text-[9px] text-quest-gold tracking-[0.3em] animate-pulse">✦ LEGENDARY ITEM FOUND ✦</div>
+                  <div className="font-pixel text-2xl sm:text-3xl text-white text-shadow-glow mt-1">{ARTIFACT.name}</div>
+                  <div className="font-body text-sm text-white/60 mt-1">{ARTIFACT.subtitle}</div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6 items-start max-w-4xl mx-auto">
+                  {/* the sealed original, framed like the rarest pull from the chest */}
+                  <div
+                    className="relative p-3 sm:p-4 scanlines"
+                    style={{
+                      background: "linear-gradient(160deg, #cdae74 0%, #b8945a 45%, #a3803f 100%)",
+                      boxShadow: "0 0 0 3px #0b0f1a, 0 0 0 6px rgba(253,184,19,0.85), 0 0 0 9px #0b0f1a, inset 0 0 50px rgba(70,42,10,0.55), 0 0 40px rgba(253,184,19,0.35)",
+                    }}
+                  >
+                    {SPARKLES.map((s, i) => (
+                      <span
+                        key={i}
+                        className="absolute text-quest-gold animate-twinkle select-none pointer-events-none leading-none"
+                        style={{ ...s.style, animationDelay: `${s.delay}s` }}
+                      >
+                        {s.glyph}
+                      </span>
+                    ))}
+                    <img src={govLetter} alt="Signed government conclusion on the autism-screening pilot" className="relative w-full h-auto block" />
+                  </div>
+
+                  {/* translated for those who can't read the original */}
+                  <div
+                    className="relative hud-glass border-2 border-quest-gold/60 p-5 sm:p-6 scanlines"
+                    style={{ boxShadow: "0 0 30px rgba(253,184,19,0.25)" }}
+                  >
+                    <span className="absolute top-2 left-2 text-quest-gold/70 text-sm leading-none select-none">✦</span>
+                    <span className="absolute top-2 right-2 text-quest-gold/70 text-sm leading-none select-none">✦</span>
+                    <span className="absolute bottom-2 left-2 text-quest-gold/70 text-sm leading-none select-none">✦</span>
+                    <span className="absolute bottom-2 right-2 text-quest-gold/70 text-sm leading-none select-none">✦</span>
+
+                    <div className="font-display text-[8px] text-quest-gold tracking-[0.3em] mb-3 text-center">TRANSLATED RECORD</div>
+                    <div className="font-pixel text-lg text-white leading-snug text-center mb-4">{ARTIFACT.translation.heading}</div>
+                    <div className="space-y-3 font-body text-sm text-white/85 leading-relaxed">
+                      {ARTIFACT.translation.paragraphs.map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
+                    </div>
+                    <div className="font-pixel text-base text-quest-gold/90 text-right mt-5">— {ARTIFACT.translation.signOff}</div>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* Skill tree */}
               <div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FINALE } from "@/lib/questData";
 import Heroine from "@/components/rpg/Heroine";
 import ParticleField from "@/components/rpg/ParticleField";
@@ -56,7 +57,7 @@ export default function FinalScreen() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <a href={FINALE.secondary.cv} className="font-display text-[10px] text-quest-gold border-2 border-quest-gold/60 hover:border-quest-gold px-5 py-3 transition-colors">VIEW CV</a>
+              <Link to={FINALE.secondary.cv} className="font-display text-[10px] text-quest-gold border-2 border-quest-gold/60 hover:border-quest-gold px-5 py-3 transition-colors">VIEW CV</Link>
               <a href={FINALE.secondary.linkedin} target="_blank" rel="noreferrer" className="font-display text-[10px] text-quest-gold border-2 border-quest-gold/60 hover:border-quest-gold px-5 py-3 transition-colors">LINKEDIN</a>
               <a href={`mailto:${FINALE.secondary.email}`} className="font-display text-[10px] text-quest-gold border-2 border-quest-gold/60 hover:border-quest-gold px-5 py-3 transition-colors">EMAIL ME</a>
             </div>

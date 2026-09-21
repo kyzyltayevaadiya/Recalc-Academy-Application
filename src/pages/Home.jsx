@@ -6,7 +6,7 @@ import AchievementPopup from "@/components/rpg/AchievementPopup";
 
 import HeroScene from "@/components/rpg/scenes/HeroScene";
 import CharacterProfile from "@/components/rpg/scenes/CharacterProfile";
-import ChapterOrigin from "@/components/rpg/scenes/ChapterOrigin";
+import JourneyTrail from "@/components/rpg/scenes/JourneyTrail";
 import ForestPassage from "@/components/rpg/scenes/cinematic/ForestPassage";
 import ChapterForest from "@/components/rpg/scenes/ChapterForest";
 import MountainPassage from "@/components/rpg/scenes/cinematic/MountainPassage";
@@ -71,10 +71,6 @@ export default function Home() {
     jumpTo("profile");
   }, [unlock, jumpTo]);
 
-  const handleProfile = useCallback(() => {
-    jumpTo("profile");
-  }, [jumpTo]);
-
   return (
     <div className="relative w-full bg-quest-navy-deep">
       <ProgressHUD chapters={CHAPTERS} activeIndex={activeIndex} progress={progress} onJump={jumpTo} />
@@ -82,10 +78,11 @@ export default function Home() {
 
       <main>
         {/* title screen */}
-        <HeroScene onStart={handleStart} onProfile={handleProfile} />
+        <HeroScene onStart={handleStart} />
         {/* calm beat — who she is */}
         <CharacterProfile />
-        <ChapterOrigin onAchievement={unlock} />
+        {/* the resume, as a rideable trail through real milestones */}
+        <JourneyTrail onAchievement={unlock} />
 
         {/* WOW 1 — she leaves home and travels into the unknown forest */}
         <ForestPassage />

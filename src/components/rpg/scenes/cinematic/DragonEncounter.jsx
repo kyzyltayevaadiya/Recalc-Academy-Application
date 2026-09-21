@@ -22,10 +22,12 @@ export default function DragonEncounter() {
     );
   });
 
-  const shadowX = useTransform(progress, [0.16, 0.36], ["-70vw", "70vw"]);
+  const shadowX = useTransform(progress, [0.16, 0.36], ["70vw", "-70vw"]);
   const shadowOp = useTransform(progress, [0.16, 0.22, 0.36, 0.4], [0, 0.45, 0.45, 0]);
   const darken = useTransform(progress, [0.14, 0.4], [0, 0.5]);
-  const dragonX = useTransform(progress, [0.36, 0.58], ["-40vw", "120vw"]);
+  // Flies in from off-screen right and settles on the right side, facing the
+  // girl (left="left") instead of exiting past her.
+  const dragonX = useTransform(progress, [0.36, 0.58], ["120vw", "45vw"]);
   const dragonY = useTransform(progress, [0.36, 0.47, 0.58], ["-6vh", "16vh", "4vh"]);
   const flashOp = useTransform(progress, [0.4, 0.43, 0.48], [0, 0.65, 0]);
   const barW = useTransform(progress, [0.68, 0.8], ["0%", "100%"]);
@@ -62,7 +64,7 @@ export default function DragonEncounter() {
 
         {/* the dragon flies across the screen */}
         <motion.div style={{ x: dragonX, y: dragonY }} className="absolute top-[18%] left-0 z-20 will-change-transform">
-          <Dragon state="hostile" facing="left" size="min(52vw, 460px)" showFire={beat === "flyby" || beat === "roar"} />
+          <Dragon state={beat === "flyby" || beat === "roar" ? "fire" : "fly"} facing="left" size="min(52vw, 460px)" />
         </motion.div>
 
         {/* the heroine watches — tiny before what is coming */}
